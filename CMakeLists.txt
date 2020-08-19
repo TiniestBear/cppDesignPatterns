@@ -7,7 +7,8 @@ project ("cppDesignPatterns")
 
 file(GLOB Main "*.h" "*.cpp")
 file(GLOB Prototype "Prototype/*.h" "Prototype/*.cpp")
+file(GLOB AbstractFactory "AbstractFactory/*.h" "AbstractFactory/*.cpp")
 
 # Add source to this project's executable.
-add_executable (cppDesignPatterns ${Main} ${Prototype})
+add_executable (cppDesignPatterns ${Main} ${Prototype} ${AbstractFactory})
 # TODO: Add tests and install targets if needed.
