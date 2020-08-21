@@ -7,6 +7,8 @@
 #include "AbstractFactory/AbstractFactory.h"
 #include "AbstractFactory/AbstractProductA.h"
 #include "AbstractFactory/ConcreteFactoryA.h"
+#include "Builder/ConcreteBuilder1.h"
+#include "Builder/Director.h"
 
 using namespace std;
 
@@ -39,6 +41,16 @@ int main()
 		factoryClient(*factory1);
 		delete factory1;
 	}
+
+	{	//BUILDER
+		ConcreteBuilder1* builder = new ConcreteBuilder1();
+		Director* director = new Director(builder);
+		director->make();
+		std::cout << builder->getResult() << std::endl;
+		delete builder;
+		delete director;
+	}
+
 
 
 	return 0;
