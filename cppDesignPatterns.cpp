@@ -9,6 +9,7 @@
 #include "AbstractFactory/ConcreteFactoryA.h"
 #include "Builder/ConcreteBuilder1.h"
 #include "Builder/Director.h"
+#include "Adapter/Adapter.h"
 
 using namespace std;
 
@@ -19,6 +20,10 @@ void factoryClient(const AbstractFactory& factory) {
 	if (product_b != nullptr) product_b->doStuff();
 
 	delete product_a; delete product_b;
+}
+
+void adapterClient(const Target* target) {
+	std::cout << target->request() << std::endl;
 }
 
 int main()
@@ -49,6 +54,24 @@ int main()
 		std::cout << builder->getResult() << std::endl;
 		delete builder;
 		delete director;
+	}
+
+	{	//ADAPTER
+		std::cout << "Client: default target" << std::endl;
+		Target* target = new Target;
+		adapterClient(target);
+
+		Adaptee* adaptee = new Adaptee;
+		std::cout << "Client: adaptee target" << std::endl;
+		std::cout << adaptee->specificRequest() << std::endl;
+		
+		Adapter* adapter = new Adapter(adaptee);
+		std::cout << "Client: adaptee through adapter" << std::endl;
+		adapterClient(adapter);
+
+		delete target;
+		delete adaptee;
+		delete adapter;
 	}
 
 
